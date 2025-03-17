@@ -11,14 +11,24 @@ function Square({ value, onSquareClick }) {
 }
 
 export default function Board() {
+  const [xIsNext, setXIsNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null));
 
   // When the Board's state changes, both the Board component and
   // every child Square re-renders automatically.
   function handleClick(i) {
+    if (squares[i]) {
+      // Return early if square already filled.
+      return;
+    }
     const nextSquares = squares.slice();
-    nextSquares[i] = "X";
-    setSquares(nextSquares)
+    if (xIsNext) {
+      nextSquares[i] = "X";
+    } else {
+      nextSquares[i] = "O";
+    }
+    setSquares(nextSquares);
+    setXIsNext(!xIsNext);
   }
 
   return (
