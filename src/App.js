@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
   return (
+    // The child Square component asks the parent Board component
+    // to update the state of the board.
     <button className="square" onClick={onSquareClick}>
       {value}
     </button>
@@ -11,6 +13,8 @@ function Square({ value, onSquareClick }) {
 export default function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
 
+  // When the Board's state changes, both the Board component and
+  // every child Square re-renders automatically.
   function handleClick(i) {
     const nextSquares = squares.slice();
     nextSquares[i] = "X";
